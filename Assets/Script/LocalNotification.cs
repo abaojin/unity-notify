@@ -1,9 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
-using System.Collections.Generic;
-using System;
+﻿using System;
+using UnityEngine;
 
-class LocalNotification
+public class LocalNotification
 {
     /// <summary>
     /// Inexact uses `set` method
@@ -32,8 +30,7 @@ class LocalNotification
     {
 #if UNITY_ANDROID && !UNITY_EDITOR
         AndroidJavaClass pluginClass = new AndroidJavaClass(fullClassName);
-        if (pluginClass != null)
-        {
+        if (pluginClass != null) {
             pluginClass.CallStatic("SetNotification", id, delay * 1000L, title, message, message, sound ? 1 : 0, vibrate ? 1 : 0, lights ? 1 : 0, bigIcon, "notify_icon_small", bgColor.r * 65536 + bgColor.g * 256 + bgColor.b, (int)executeMode, mainActivityClassName);
         }
 #endif
@@ -43,8 +40,7 @@ class LocalNotification
     {
 #if UNITY_ANDROID && !UNITY_EDITOR
         AndroidJavaClass pluginClass = new AndroidJavaClass(fullClassName);
-        if (pluginClass != null)
-        {
+        if (pluginClass != null) {
             pluginClass.CallStatic("SetRepeatingNotification", id, delay * 1000L, title, message, message, timeout * 1000, sound ? 1 : 0, vibrate ? 1 : 0, lights ? 1 : 0, bigIcon, "notify_icon_small", bgColor.r * 65536 + bgColor.g * 256 + bgColor.b, mainActivityClassName);
         }
 #endif
@@ -59,13 +55,4 @@ class LocalNotification
         }
 #endif
     }
-
-    //public static void CancelAllNotifications()
-    //{
-//#if UNITY_ANDROID && !UNITY_EDITOR
-    //    AndroidJavaClass pluginClass = new AndroidJavaClass(fullClassName);
-    //    if (pluginClass != null)
-    //        pluginClass.CallStatic("CancelAll");
-//#endif
-    //}
 }
